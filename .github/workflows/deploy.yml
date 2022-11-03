@@ -1,0 +1,28 @@
+on:
+  workflow_call:
+    inputs:
+      environment:
+        required: true
+        type: string
+      project_id:
+        required: false
+        type: string
+name: deploy-workflow
+run-name: ${{ github.actor }} is requesting a deploy for ${{inputs.environment}} to project ${{inputs.project_id}}
+jobs:      
+  download-artifact:
+    runs-on: ubuntu-latest
+    environment: ${{inputs.environment}}
+    steps:
+      - run: echo '${{ inputs.environment }}'
+      - run: echo 'download complete'
+  deploy-artifact:
+    needs: download-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'deploy-artifact'    
+  validate-deploy:
+    needs: deploy-artifact
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo 'validation complete'          
