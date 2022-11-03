@@ -1,0 +1,19 @@
+name: orchestrate-approval-workflow
+run-name: ${{ github.actor }} is deploying using GitHub Actions
+on: workflow_dispatch
+jobs:
+          
+  deploy-Cert-workflow-passing-data:
+    uses: ./.github/workflows/deploy.yml
+    #uses: octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
+    with:
+      environment: Certification
+      project_id: sab-cert-cicd-7522
+      
+  deploy-Prod-workflow-passing-data:
+    needs: deploy-Cert-workflow-passing-data
+    uses: ./.github/workflows/deploy.yml
+    #uses: octo-org/example-repo/.github/workflows/reusable-workflow.yml@main
+    with:
+      environment: Production
+      project_id: sab-prod-cicd-7522
