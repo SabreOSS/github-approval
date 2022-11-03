@@ -1,4 +1,4 @@
-name: orchestrate-approval-workflow
+name: orchestrate-cert-prod-approval-workflow
 run-name: ${{ github.actor }} is deploying using GitHub Actions
 on: workflow_dispatch
 jobs:
